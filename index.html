@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM3U2kq9t4V4F6xRz4c4B6sWv3A1b5l4NQkNm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1030; 
+            background-color: rgba(10, 30, 23, 0.8); 
+        }
+        .second-navbar {
+            position: sticky;
+            top: 60px; 
+            z-index: 1020; 
+            background-color: transparent; 
+            transition: background-color 0.3s, color 0.3s; 
+            color: grey; 
+        }
+        .second-navbar.scrolled {
+            background-color: rgb(9, 56, 46); 
+            color: grey; /* Keep text color white on black background */
+        }
+        .navbar-brand {
+            font-size: 2rem; 
+            font-weight: bold; 
+            color: #fff; 
+        }
+        .navbar-nav .nav-link {
+            font-size: 1.25rem;
+            font-family:'Times New Roman', Times, serif;
+            color: white; 
+        }
+        .navbar-nav .nav-link:hover {
+            color:gray; 
+        }
+        .university-image {
+            width: 100vw; 
+            height: 100vh; 
+            object-fit: cover; 
+            z-index: -1; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+        }
+        .content {
+            position: relative; 
+            z-index: 1; 
+            padding-top: 100vh; /* Space for the button */
+        }
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column; 
+            
+            align-items: center;
+            color: #fff; 
+            padding: 20px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5); 
+        }
+        .section:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.5); 
+            color: #000; 
+        }
+        .learn-button {
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            width: 100%; /* Full width */
+            z-index: 2;
+            font-size: 1.5rem; /* Increase font size */
+            padding: 15px; /* More padding */
+            background-color: rgba(10, 30, 23, 0.8); /* Background color */
+            border-radius: 5px; /* Slightly rounded corners */
+            transition: opacity 0.3s; /* Smooth transition for hiding */
+        }
+        .learn-button.hidden {
+            opacity: 0; /* Hidden state */
+            pointer-events: none; /* Prevent clicks */
+        }
+        .card {
+            transition: transform 0.2s; 
+            height: 250px; 
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card-img-top {
+            height: 150px; 
+            object-fit: cover; 
+        }
+        .card-body {
+            display: flex;
+            flex-direction: column; 
+            justify-content: space-between; 
+        }
+        .learn-more-section p {
+    font-size: 1.5rem; /* Adjust this value as needed */
+    line-height: 1.6; /* Optional: Adjust line height for better readability */
+}
+.section {
+            padding: 40px 20px;
+            background-color: white;
+            color: black;
+            position: relative; /* Needed for absolute positioning of icons */
+        }
+        .hover-effect {
+            cursor: pointer;
+            transition: color 0.3s, text-decoration 0.3s;
+        }
+
+        .hover-effect:hover {
+            color:rgb(2, 16, 12) ;
+            text-decoration: underline;
+        }
+
+        .list-item {
+            cursor: pointer;
+            transition: color 0.3s, text-decoration 0.3s;
+        }
+
+        .list-item:hover {
+            color:rgb(2, 16, 12);
+            text-decoration: underline;
+        }
+        .footer {
+            background-color:rgba(10, 30, 23, 0.8) ; 
+            color: gray; 
+            padding: 30px 20px; 
+            position: relative;
+            font-size: 1.2rem; 
+        }
+
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer .footer-left {
+            font-weight: bold;
+            
+        }
+
+        .footer a {
+            color: gray; 
+            margin-left: 20px; 
+            text-decoration: none; 
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: rgb(2, 16, 12); 
+        }
+
+       
+        
+    </style>
+    <title>Air University - Single Page</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <h1 class="navbar-brand" style="font-family: 'Times New Roman', Times, serif;">Air University</h1>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item" style="margin: 3px;">
+                    <a class="nav-link" href="#societal-mission">Societal Mission</a>
+                </li>
+                <li class="nav-item" style="margin: 3px;">
+                    <a class="nav-link" href="#students">Students</a>
+                </li>
+                <li class="nav-item" style="margin: 3px;">
+                    <a class="nav-link" href="#faculty & staff">Faculty & Staff</a>
+                </li>
+                <li class="nav-item" style="margin: 3px;">
+                    <a class="nav-link" href="#families">Families</a>
+                </li>
+                <li class="nav-item" style="margin: 3px;">
+                    <a class="nav-link" href="#visitors">Visitors</a>
+                </li>
+                <li class="nav-item" style="margin: 3px;">
+                    <a class="nav-link" href="#alumni">Alumni</a>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <button class="btn btn-secondary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<nav class="navbar navbar-expand-lg second-navbar">
+    <div class="container-fluid justify-content-center">
+        <ul class="navbar-nav">
+            <li class="nav-item" style="margin: 3px;">
+                <a class="nav-link" href="#news">News</a>
+            </li>
+            <li class="nav-item" style="margin: 3px;">
+                <a class="nav-link" href="#academic">Academic</a>
+            </li>
+            <li class="nav-item" style="margin: 3px;">
+                <a class="nav-link" href="#research">Research</a>
+            </li>
+            <li class="nav-item" style="margin: 3px;">
+                <a class="nav-link" href="#events">Events</a>
+            </li>
+            <li class="nav-item" style="margin: 3px;">
+                <a class="nav-link" href="#health-care">Health Care</a>
+            </li>
+            <li class="nav-item" style="margin: 3px;">
+                <a class="nav-link" href="#campus-life">Campus Life</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<img src="https://au.edu.pk/Pages/Campus/AU_Kharian_Campus/images/AUKharian_Img5.jpg" alt="Air University" class="university-image">
+<a href="#societal-mission" class="btn btn-secondary btn-lg learn-button" style="font-family: 'Times New Roman', Times, serif;">More About Air University</a>
+
+<div class="content">
+    <div id="societal-mission" class="section" style="background-color:grey ; color: black;">
+        <h2 class="display-6 fw-bold" style="font-family: 'Times New Roman', Times, serif;" >Societal Mission</h2>
+       <p style="text-align: center; font-size: 30px;font-family: 'Times New Roman', Times, serif;margin-top: 15px;">Air was founded almost 150 years ago on a bedrock of societal purpose. Our mission is to contribute to the world by educating students for lives of leadership and contribution with integrity; advancing fundamental knowledge and cultivating creativity; leading in pioneering research for effective clinical therapies; and accelerating solutions and amplifying their impact.</p>
+<a href="Societies.html" class="btn btn-dark" style="border-radius: 0px;width: 300px; height: 50px; text-align: center; margin-top: 30px; font-family: 'Times New Roman', Times, serif; ">More About Societies</a></button>
+    </div>
+
+    <div id="news" class="section">
+        <h2 class="display-6 fw-bold" style="font-family: 'Times New Roman', Times, serif;" >Campus News</h2>
+        <p style="text-align: center; font-size: 30px;font-family: 'Times New Roman', Times, serif;margin-top: 5px;">Stories about people, research, and innovation across the Farm</p>
+        <div class="container">
+            <div class="row ">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D22AQEmektG2VDKcg/feedshare-shrink_800/feedshare-shrink_800/0/1707922707787?e=2147483647&v=beta&t=zOFXdBP41N_1yR9adj2ciRRSQZRMV6Pgp1FsZsnyc7U" alt="Digital Marketing Workshop" class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title">Digital Marketing Workshop</h5>
+                            <p class="card-text">Our recent workshop on digital marketing helped students gain vital skills.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="https://au.edu.pk/Pages/NewsEvents/EventGallary/24_2.jpg" alt="Annual Science Fair" class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title">Annual Award Ceremony</h5>
+                            <p class="card-text">The Annual Award Ceremony event held to honor the outstanding achievements of our gold medalists.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="https://live.staticflickr.com/65535/50924873058_78c7195b1b_z.jpg" alt="Cultural Festival" class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title">Excellence Ceremony</h5>
+                            <p class="card-text">The Excellence Ceremony is celebrating the outstanding achievements of students, faculty, and staff </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="https://au.edu.pk/Pages/NewsEvents/EventGallary/76_7.jpg" alt="Annual Science Fair" class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title">Cultural Festival</h5>
+                            <p class="card-text">The annual cultural festival celebrated diversity with performances in our university.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img src="https://www.au.edu.pk/AU_New_Assets/images/blog/FOHS3.jpg" alt="Annual Science Fair" class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title">Annual Science Fair</h5>
+                            <p class="card-text">The annual science fair showcased innovative projects from our students.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img src="https://www.au.edu.pk/pages/Plainning_and_Development/Pics/SC_Nowshera_11.jpg" alt="Annual Science Fair" class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title">Opening Ceremony</h5>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="academic" class="section" style="background-color: grey; color: black;">
+        <h2 class="display-6 fw-bold" style="font-family: 'Times New Roman', Times, serif;" >Acadmics</h2>
+        <p style="text-align: center; font-size: 30px;font-family: 'Times New Roman', Times, serif;margin-top: 15px;">Preparing students to make meaningful contributions to society as engaged citizens and leaders in a complex world.</p>
+        <div class="container">
+            <div class="row" style="margin-top: 30px;">
+                <div class="col-md-4 mb-4" >
+                    <img   src="https://www.stanford.edu/wp-content/uploads/2023/05/20230418_Grayson_Armour_95A0681-2.jpg" alt="Academic Program 1" class="img-fluid">
+                    <h5 style="margin-top: 10px; font-family: 'Times New Roman', Times, serif;" class="fw-bold" >Undergraduate Education</h5>
+                    <p style="text-align: left;font-family: 'Times New Roman', Times, serif; font-size: 20px;">Rich learning experiences that provide a broad liberal arts foundation and deep subject-area expertise</p>
+                    <p style="text-align: left;margin-top: 5px;font-family: 'Times New Roman', Times, serif;"><a href="#" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">Undergraduate Education</a></p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <img  src="https://www.stanford.edu/wp-content/uploads/2023/03/20220714Hopkins_Marine_Station_N6A7270-1-2048x1366.jpg" alt="Academic Program 2" class="img-fluid">
+                    <h5 style="margin-top: 10px; font-family: 'Times New Roman', Times, serif;" class="fw-bold">Graduate Education</h5>
+                    <p style="text-align: left;font-family: 'Times New Roman', Times, serif; font-size: 20px;">Unsurpassed opportunities to participate in the advancement of entire fields of knowledge</p>
+                    <p style="text-align: left;margin-top: 5px; font-family: 'Times New Roman', Times, serif;"><a href="#" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">Graduate Education</a></p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <img  src="https://www.stanford.edu/wp-content/uploads/2023/03/20211117_Elizabeth_Reese_N6A0441-2048x1366.jpg" alt="Academic Program 3" class="img-fluid">
+                    <h5 style="margin-top: 10px; font-family: 'Times New Roman', Times, serif;" class="fw-bold">Driving impact</h5>
+                    <p style="text-align: left;font-family: 'Times New Roman', Times, serif; font-size: 20px;">Continuing adult education, executive and professional programs, and programs for K-12 students</p>
+                    <p style="text-align: left;margin-top: 5px; font-family: 'Times New Roman', Times, serif;"><a href="#" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" >Driving Impact</a></p>
+                </div>
+            </div>
+            <div>
+              <h2 class=" fw-bold" style="margin-top: 50px; font-family: 'Times New Roman', Times, serif;">Seven schools in which to pursue your passions</h2>
+              <a href="Acadmics.html" class="btn btn-dark" style="border-radius: 0px;width: 300px; height: 50px; text-align: center; margin-top: 30px; font-family: 'Times New Roman', Times, serif; ">More About Acadmics</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="research" class="section" >
+        <h2 class="display-6 fw-bold" style="font-family: 'Times New Roman', Times, serif;" >Research</h2>
+        <p style="text-align: center; font-size: 30px;font-family: 'Times New Roman', Times, serif;margin-top: 15px; margin-bottom: 50px;">Driving discoveries vital to our world, our health, and our intellectual life</p>
+        <hr class="border border-dark border-2 opacity-50" style="width: 1200px;">
+        <div class="row" style="margin-top: 15px ;">
+          <div class="col-4">
+            <h1 class="display-6 fw-bold" style="font-family: 'Times New Roman', Times, serif; ">15 Institutes</h1>
+            <p style="text-align: center; font-size: 20px;font-family: 'Times New Roman', Times, serif; "> Disiplinary Boundaries</p>
+          </div>
+          <div class="col-4">
+            <h1 class="display-6 fw-bold" style="font-family: 'Times New Roman', Times, serif;">20 Libraries</h1>
+            <p style="text-align: center; font-size: 20px;font-family: 'Times New Roman', Times, serif; ">hold over 12 million items</p>
+          </div>
+       <div class="col-4">
+            <h1 class="display-6 fw-bold" style="font-family: 'Times New Roman', Times, serif;">$1.9 Billion</h1>
+            <p style="text-align: center; font-size: 20px;font-family: 'Times New Roman', Times, serif;">sponsored research budget</p>
+          </div>
+          <hr class="border border-dark border-2 opacity-50" style="width: 1200px;">
+          <a href="Research.html" class="btn btn-dark" style="border-radius: 0px;width: 300px; height: 50px; text-align: center; margin-top: 30px; font-family: 'Times New Roman', Times, serif; margin-left: 470px; ">More About Research</a>
+        </div>
+    </div>
+    <div id="events" class="section" style="background-color: grey; color: black;">
+        <h2 class="display-6 fw-bold" style="font-family: 'Times New Roman', Times, serif;">Upcoming Events</h2>
+        <p style="text-align: center; font-size: 30px;font-family: 'Times New Roman', Times, serif;margin-top: 15px; margin-bottom: 50px;">Explore our academic programs and offerings.</p>
+        <div class="container">
+            <div class="row">
+              <div class="col-md-3 mb-4">
+                <div class="card h-100">
+                    <img src="https://localist-images.azureedge.net/photos/47968374647782/square_300/2b2bc4291c09a568cf0d638fbdca6a1901453df8.jpg" alt="Annual Science Fair" class="card-img-top img-fluid">
+                    <div class="card-body">
+                        <h5 class="card-title">Tour Presentation</h5>
+                        <p class="card-text">The tour presentation held to honor the outstanding achievements of our gold medalists.</p>
+                    </div>
+                </div>
+            </div> <div class="col-md-3 mb-4">
+              <div class="card h-100">
+                  <img src="https://localist-images.azureedge.net/photos/47870422855488/square_300@2x/ee9f904b89ce5fb7176839d949972966930037f6.jpg" alt="Annual Science Fair" class="card-img-top img-fluid">
+                  <div class="card-body">
+                      <h5 class="card-title">Exhibition</h5>
+                      <p class="card-text">The Exhibitin event held to honor the outstanding achievements of our gold medalists.</p>
+                  </div>
+              </div>
+          </div> <div class="col-md-3 mb-4">
+            <div class="card h-100">
+                <img src="https://localist-images.azureedge.net/photos/47739087822349/square_300@2x/8d1664ca6fbc9de1c93b376d64d0879e6a7272bb.jpg" alt="Annual Science Fair" class="card-img-top img-fluid">
+                <div class="card-body">
+                    <h5 class="card-title">Film Screening</h5>
+                    <p class="card-text">The Screening Ceremony event held to honor the outstanding achievements of our gold medalists.</p>
+                </div>
+            </div>
+        </div> <div class="col-md-3 mb-4">
+          <div class="card h-100">
+              <img src="https://localist-images.azureedge.net/photos/47721449209779/square_300/c049d9958480c5427d4572b20fd1c7ad6fd5bfd4.jpg" alt="Annual Science Fair" class="card-img-top img-fluid">
+              <div class="card-body">
+                  <h5 class="card-title">Tour</h5>
+                  <p class="card-text" > Public Tours are held for acknowledgements as well as enjoyment.</p>
+      
+                 
+              </div>
+          </div>
+      </div>
+      <a href="Events.html" class="btn btn-dark" style="border-radius: 0px;width: 300px; height: 50px; text-align: center; margin-top: 30px; font-family: 'Times New Roman', Times, serif; margin-left: 430px; ">More About Events</a>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="health-care" class="section">
+      <h2 class="display-6 fw-bold" style="font-family: 'Times New Roman', Times, serif;" >Health Care</h2>
+      <p style="text-align: center; font-size: 30px;font-family: 'Times New Roman', Times, serif;margin-top: 15px;">Advancing human health through innovative research, education, and care</p>
+      <div class="container">
+          <div class="row" style="margin-top: 30px;">
+              <div class="col-md-4 mb-4" >
+                  <img   src="https://www.stanford.edu/wp-content/uploads/2022/04/Health-care-1.jpg" alt="Academic Program 1" class="img-fluid">
+                  <h5 style="margin-top: 10px; font-family: 'Times New Roman', Times, serif;" class="fw-bold" >Stanford Medicine</h5>
+                  <p style="text-align: left;font-family: 'Times New Roman', Times, serif; font-size: 20px;">Leading a worldwide revolution in precision health through biomedical research, education, and clinical enterprises</p>
+                  <p style="text-align: left;margin-top: 5px;font-family: 'Times New Roman', Times, serif;"><a href="#" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">Stanford Medicine</a></p>
+              </div>
+              <div class="col-md-4 mb-4">
+                  <img  src="https://www.stanford.edu/wp-content/uploads/2022/04/Health-care-2-2048x1365.jpg" alt="Academic Program 2" class="img-fluid">
+                  <h5 style="margin-top: 10px; font-family: 'Times New Roman', Times, serif;" class="fw-bold">Stanford Health Care</h5>
+                  <p style="text-align: left;font-family: 'Times New Roman', Times, serif; font-size: 20px;">Leveraging expertise and advanced technology  to deliver unparalleled care for each patient’s unique needs</p>
+                  <p style="text-align: left;margin-top: 5px; font-family: 'Times New Roman', Times, serif;"><a href="#" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">Stanford Health Care</a></p>
+              </div>
+              <div class="col-md-4 mb-4">
+                  <img  src="https://www.stanford.edu/wp-content/uploads/2022/04/Health-care-3.jpg" alt="Academic Program 3" class="img-fluid">
+                  <h5 style="margin-top: 10px; font-family: 'Times New Roman', Times, serif;" class="fw-bold">Stanford Children’s Health</h5>
+                  <p style="text-align: left;font-family: 'Times New Roman', Times, serif; font-size: 20px;">The only health care network in the Bay Area – and one of the few in the country – exclusively dedicated to pediatric and obstetric care</p>
+                  <p style="text-align: left;margin-top: 5px; font-family: 'Times New Roman', Times, serif;"><a href="#" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" >Stanford Children’s Health</a></p>
+              </div>
+          </div>
+          <a href="Health.html" class="btn btn-dark" style="border-radius: 0px;width: 300px; height: 50px; text-align: center; margin-top: 30px; font-family: 'Times New Roman', Times, serif; ">More About Health Care</a>
+    </div>
+    </div>
+
+    <div id="campus-life" class="section" style="background-color: grey; color: #000;">
+      <h2 class="display-6 fw-bold" style="font-family: 'Times New Roman', Times, serif;" >Campus Life</h2>
+      <p style="text-align: center; font-size: 30px;font-family: 'Times New Roman', Times, serif;margin-top: 15px;">Building a vibrant community of creative and accomplished people from around the world</p>
+      <div class="container">
+          <div class="row" style="margin-top: 30px;">
+              <div class="col-md-4 mb-4" >
+                  <img   src="https://www.stanford.edu/wp-content/uploads/2022/04/Campus-life-1.jpg" alt="Academic Program 1" class="img-fluid">
+                  <h5 style="margin-top: 10px; font-family: 'Times New Roman', Times, serif; text-align: left;" class="fw-bold" >Student Life</h5>
+                  <p style="text-align: left;font-family: 'Times New Roman', Times, serif; font-size: 20px;">A residential campus with diverse housing, exceptional dining, and over 600 student organizations</p>
+                  <p style="text-align: left;margin-top: 5px;font-family: 'Times New Roman', Times, serif;"><a href="#" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">Student Life</a></p>
+              </div>
+              <div class="col-md-4 mb-4">
+                  <img  src="https://www.stanford.edu/wp-content/uploads/2022/04/Campus-life-2.jpg" alt="Academic Program 2" class="img-fluid">
+                  <h5 style="margin-top: 10px; font-family: 'Times New Roman', Times, serif; text-align: left;" class="fw-bold">Arts & Culture</h5>
+                  <p style="text-align: left;font-family: 'Times New Roman', Times, serif; font-size: 20px;">A rich tradition of fostering creativity and a vibrant arts district on campus</p>
+                  <p style="text-align: left;margin-top: 5px; font-family: 'Times New Roman', Times, serif;"><a href="#" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">Arts & Culture</a></p>
+              </div>
+              <div class="col-md-4 mb-4">
+                  <img  src="https://www.stanford.edu/wp-content/uploads/2022/04/Campus-life-3.jpg" alt="Academic Program 3" class="img-fluid">
+                  <h5 style="margin-top: 10px; font-family: 'Times New Roman', Times, serif; text-align: left;" class="fw-bold">Recreation & Wellness</h5>
+                  <p style="text-align: left;font-family: 'Times New Roman', Times, serif; font-size: 20px;">State-of-the-art facilities and fitness programs to encourage movement and play</p>
+                  <p style="text-align: left;margin-top: 5px; font-family: 'Times New Roman', Times, serif;"><a href="#" class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" >Recreation</a></p>
+              </div>
+          </div>
+          <a href="Campus.html" class="btn btn-dark" style="border-radius: 0px;width: 300px; height: 50px; text-align: center; margin-top: 30px; font-family: 'Times New Roman', Times, serif;  ">More About Campus Life</a>
+    </div>
+    </div>
+    <div id="Admission" class="section " >
+        <h2 class="display-6 fw-bold" style="font-family: 'Times New Roman', Times, serif;">Admission</h2>
+        <p style="text-align: center; font-size: 30px;font-family: 'Times New Roman', Times, serif;margin-top: 15px; margin-bottom: 40px;" >Offering extraordinary freedom to explore, to collaborate, and to challenge yourself</p>
+        
+        <img  src="https://www.stanford.edu/wp-content/uploads/2022/08/Maya-admission.jpg" alt="">
+      <div class="row justify-content-center">
+        <div class="col-6">
+          <p class="display-6 fw-bold" style="font-family: 'Times New Roman', Times, serif; text-align: left; font-size: 20px;margin-top: 25px">Explore the possibilities of a Stanford education as you map out your college journey.</p2>
+          <p style="text-align: left; font-family: 'Times New Roman', Times, serif; margin-bottom: 15px;font-size: 20px;" >We look for distinctive students who exhibit an abundance of energy and curiosity in their classes, activities, projects, research, and lives.</p>
+        </div>
+        <div class="col-6">
+          <p class="display-6 fw-bold" style="font-family: 'Times New Roman', Times, serif; text-align: left; font-size: 20px;margin-top: 25px">Stanford meets the full financial need of every admitted undergrad who qualifies for assistance.</p2>
+          <p style="text-align: left; font-family: 'Times New Roman', Times, serif; margin-bottom: 15px; font-size: 20px;" >More than two-thirds of undergrads receive some form of financial assistance. Generally, tuition is covered for families with incomes below $150,000.</p>
+          
+        </div>
+
+      </div>
+      <a href="Admission.html" class="btn btn-dark" style="border-radius: 0px;width: 300px; height: 50px; text-align: center; margin-top: 30px; font-family: 'Times New Roman', Times, serif;  ">More About Admission</a>
+    </div>
+    <div id="Last Page" class="section  " style="background-color: gray;color: #000;" >
+      <div class="row ">
+        <h2 class="display-6 fw-bold" style="font-family: 'Times New Roman', Times, serif;">More Information</h2>
+        <p style="text-align: center; font-size: 20px;font-family: 'Times New Roman', Times, serif;margin-top: 15px; margin-bottom: 40px;" >Explore the World an get Experienced</p>
+        <div class="col-md-3">
+          
+            <h3 class="hover-effect display-6 fw-bold" style="font-family: 'Times New Roman', Times, serif;  font-size: 30px;margin-top: 25px">Schools</h3>
+            <ul>
+                <li class="list-item"style="font-family: 'Times New Roman', Times, serif; ">School of Engineering</li>
+                <li class="list-item"style="font-family: 'Times New Roman', Times, serif;">School of Business</li>
+                <li class="list-item"style="font-family: 'Times New Roman', Times, serif;">School of Arts</li>
+                <li class="list-item"style="font-family: 'Times New Roman', Times, serif;">School of Health Sciences</li>
+               
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <h3 class="hover-effect display-6 fw-bold" style="font-family: 'Times New Roman', Times, serif;  font-size: 30px;margin-top: 25px;margin-left: 50px;">Academics</h3>
+            <ul>
+                <li class="list-item"style="font-family: 'Times New Roman', Times, serif;margin-left: 50px;">Bachelor's Programs</li>
+                <li class="list-item"style="font-family: 'Times New Roman', Times, serif;;margin-left: 50px;">Master's Programs</li>
+                <li class="list-item"style="font-family: 'Times New Roman', Times, serif;margin-left: 50px;">PhD Programs</li>
+               
+               
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <h3 class="hover-effect display-6 fw-bold" style="font-family: 'Times New Roman', Times, serif;  font-size: 30px;margin-top: 25px;margin-left: 70px;">About </h3>
+            <ul>
+                <li class="list-item" style="font-family: 'Times New Roman', Times, serif;margin-left: 70px;">History of Air University</li>
+                <li class="list-item"style="font-family: 'Times New Roman', Times, serif;;margin-left: 70px;">Mission and Vision</li>
+                <li class="list-item"style="font-family: 'Times New Roman', Times, serif;margin-left: 70px;">Leadership Team</li>
+               
+                
+                
+            </ul>
+        </div>
+        
+        
+        <div class="col-md-3">
+          <button type="button" class="btn btn-secondary" style="border-radius: 0%;margin-bottom: 15px; width: 100px; color:  rgba(10, 30, 23, 0.8);font-family: 'Times New Roman', Times, serif;font-size: 20px; margin-top: 40px; margin-left: 50px;">Applying</button><br>
+          <button type="button" class="btn btn-secondary"style="border-radius: 0%;  margin-bottom: 15px;width: 100px;color:  rgba(10, 30, 23, 0.8); font-family: 'Times New Roman', Times, serif;font-size: 20px; margin-left: 50px; ">Visiting</button><br>
+          <button type="button" class="btn btn-secondary"style="border-radius: 0%;margin-bottom: 15px;width: 100px;color:  rgba(10, 30, 23, 0.8);font-family: 'Times New Roman', Times, serif;font-size: 20px; margin-left: 50px;">Career</button><br>
+         
+        </div>
+
+      </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-left">
+                <span class="fw-bold" style="font-family: 'Times New Roman', Times, serif;font-size: 30px;">Air University</span>
+            </div>
+            <div class="footer-right">
+                <span style="font-family: 'Times New Roman', Times, serif;">Emergency Number: 123-456-7890</span><br>
+                <a style="font-family: 'Times New Roman', Times, serif;" href="#">Terms of Use</a>
+                <a style="font-family: 'Times New Roman', Times, serif;" href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    
+
+   
+    
+  
+ 
+   
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Change navbar background on scroll
+    window.addEventListener('scroll', function() {
+        const secondNavbar = document.querySelector('.second-navbar');
+        const learnButton = document.querySelector('.learn-button');
+        if (window.scrollY > 0) {
+            secondNavbar.classList.add('scrolled');
+            learnButton.classList.add('hidden'); // Hide the button on scroll
+        } else {
+            secondNavbar.classList.remove('scrolled');
+            learnButton.classList.remove('hidden'); // Show the button when at top
+        }
+    });
+</script>
+</body>
+</html>
